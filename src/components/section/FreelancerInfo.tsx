@@ -12,12 +12,20 @@ import { name, description, websites, socialMedia } from "@/store";
 import UrlsInput from "../UI/UrlsInput";
 import { SocialMediaData, WebsitesData } from "@/data";
 
+import { useTranslation } from "react-i18next";
+
 export interface FreelancerInfoProps {
   className?: string;
 }
 const FreelancerInfo: React.FC<FreelancerInfoProps> = ({
   className = "",
 }) => {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng: any) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <div className={twMerge("", className)}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 ">
@@ -41,6 +49,14 @@ const FreelancerInfo: React.FC<FreelancerInfoProps> = ({
           <br />
           <h3 className="font-bold">Websites</h3>
           <UrlsInput items={WebsitesData} onUpdate={websites.set}/>
+          <br />
+          <button onClick={() => changeLanguage("de")} className="btn bg-secondary">
+            {t("suche")}
+          </button>
+          <br />
+          <button onClick={() => changeLanguage("en")} className="btn bg-secondary">
+            {t("suche")}
+          </button>
           <br />
           <h3 className="font-bold">Social media</h3>
           <UrlsInput items={SocialMediaData} onUpdate={socialMedia.set} />
